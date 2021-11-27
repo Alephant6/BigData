@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 实体类Student，实现序列化接口Serializable, Comparable
  *
- * @author alephant
+ * @author Alephant
  */
 public class Student implements Serializable, Comparable {
     private Integer id;

@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 /**
  * 循环遍历所有文件并读取文件内容
- * @author zhang
+ * @author Alephant
  */
 public class Demo5 {
     public static void main(String[] args) {

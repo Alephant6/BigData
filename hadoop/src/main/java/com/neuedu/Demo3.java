@@ -7,7 +7,7 @@ import org.apache.hadoop.fs.Path;
 
 /**
  * 按字节块查看文件内容：任何文件类型均合适，特别擅长二进制
- * @author zhang
+ * @author Alephant
  */
 public class Demo3 {
     public static void main(String[] args) {

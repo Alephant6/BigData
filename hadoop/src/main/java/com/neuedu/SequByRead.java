@@ -19,7 +19,7 @@ public class SequByRead {
             FileSystem fs = FileSystem.get(conf);
             // SequenceFile写入
             Path dst = new Path("/seq.txt");
-            SequenceFile.Reader reader = new SequenceFile.Reader(fs, dst, conf);
+            SequenceFile.Reader reader = new SequenceFile.Reader(conf, SequenceFile.Reader.file(dst));
             //long position = reader.getPosition();
             IntWritable k = new IntWritable();
             Text v = new Text();

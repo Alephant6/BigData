@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 /**
  * 其它操作：删除、修改、查看块
- * @author zhang
+ * @author Alephant
  */
 public class Demo6 {
     public static void main(String[] args) {

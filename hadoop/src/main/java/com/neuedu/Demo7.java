@@ -8,7 +8,7 @@ import org.apache.hadoop.fs.Path;
 
 /**
  * 其它操作：删除、修改、查看块
- * @author zhang
+ * @author Alephant
  */
 public class Demo7 {
     public static void main(String[] args) {

@@ -22,7 +22,9 @@ public class SequByWrite {
             FileSystem fs = FileSystem.get(conf);
             // SequenceFile写入
             Path dst = new Path("/seq.txt");
-            SequenceFile.Writer writer = new SequenceFile.Writer(fs,conf,dst, IntWritable.class, Text.class);
+            SequenceFile.Writer writer = SequenceFile.createWriter(conf, SequenceFile.Writer.file(dst),
+                    SequenceFile.Writer.keyClass(IntWritable.class), SequenceFile.Writer.valueClass(Text.class),
+                    SequenceFile.Writer.compression(SequenceFile.CompressionType.NONE));
             for (int i = 0;i<data.length;i++){
                 writer.append(new IntWritable(i),new Text(data[i]));
             }

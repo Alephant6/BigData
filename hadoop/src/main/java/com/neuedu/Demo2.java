@@ -7,7 +7,7 @@ import org.apache.hadoop.fs.Path;
 
 /**
  * 逐字节查看文件内容：不推荐，效率太低
- * @author zhang
+ * @author Alephant
  */
 public class Demo2 {
     public static void main(String[] args) {

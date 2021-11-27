@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 /**
  * 缓冲读取器查看文件内容：专用于文本文件
- * @author zhang
+ * @author Alephant
  */
 public class Demo4 {
     public static void main(String[] args) {
