@@ -5,7 +5,7 @@ import org.apache.hadoop.io.Text;
 
 import java.nio.charset.StandardCharsets;
 
-
+// Demo 7与Demo 6重复，所以不存在Demo 7.
 public class Demo8 {
     public static void main(String arg[]){
         IntWritable v = new IntWritable(6);
