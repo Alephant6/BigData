@@ -5,6 +5,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
+/**
+ * 自定义Reducer类；负责汇总，总计单词的次数
+ *
+ * @author Alephant
+ */
 public class WordCountReducer extends Reducer <WordCount, NullWritable, WordCount, NullWritable> {
     @Override
     protected void reduce(WordCount key, Iterable<NullWritable> values, Reducer<WordCount, NullWritable, WordCount, NullWritable>.Context context) throws IOException, InterruptedException {

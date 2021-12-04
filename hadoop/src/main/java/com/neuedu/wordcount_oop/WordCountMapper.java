@@ -10,6 +10,11 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+/**
+ *  自定义Mapper类；负责分，江一行文本拆分成N个单词
+ *
+ * @author Alephant
+ */
 public class WordCountMapper extends Mapper<LongWritable, Text, WordCount, NullWritable> {
     @Override
     protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, WordCount, NullWritable>.Context context) throws IOException, InterruptedException {
