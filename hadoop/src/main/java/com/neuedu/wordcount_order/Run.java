@@ -49,6 +49,8 @@ public class Run {
             job.setMapOutputValueClass(NullWritable.class);
             // 设置自定义排序类：一个排序类就是一种排序方案
             job.setSortComparatorClass(SortedByWordDESC.class);
+            // 设置分组类
+            job.setGroupingComparatorClass(GroupByWord.class);
             // 设置Reducer
             job.setReducerClass(WordCountReducer.class);
             job.setOutputKeyClass(WordCount.class);
