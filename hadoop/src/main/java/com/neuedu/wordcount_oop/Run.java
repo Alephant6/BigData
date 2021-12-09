@@ -1,14 +1,11 @@
 package com.neuedu.wordcount_oop;
 
-import com.neuedu.wordcount_normal.WordCountMapper;
-import com.neuedu.wordcount_normal.WordCountReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -17,6 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
 
 public class Run {
     public static void main(String[] args) {
@@ -38,18 +36,18 @@ public class Run {
             // 创建任务
             Job job = Job.getInstance(conf, "wordcount");
             // 设置运行类
-            job.setJarByClass(com.neuedu.wordcount_normal.Run.class);
+            job.setJarByClass(com.neuedu.wordcount_oop.Run.class);
             // 设置输入
             job.setInputFormatClass(TextInputFormat.class);
             FileInputFormat.setInputPaths(job,inputPath);
             // 设置Mapper
             job.setMapperClass(WordCountMapper.class);
-            job.setMapOutputKeyClass(Text.class);
-            job.setMapOutputValueClass(IntWritable.class);
+            job.setMapOutputKeyClass(WordCount.class);
+            job.setMapOutputValueClass(NullWritable.class);
             // 设置Reducer
             job.setReducerClass(WordCountReducer.class);
-            job.setOutputKeyClass(Text.class);
-            job.setOutputValueClass(IntWritable.class);
+            job.setOutputKeyClass(WordCount.class);
+            job.setOutputValueClass(NullWritable.class);
             // 设置输出
             job.setOutputFormatClass(TextOutputFormat.class);
             FileOutputFormat.setOutputPath(job, outputPath);
