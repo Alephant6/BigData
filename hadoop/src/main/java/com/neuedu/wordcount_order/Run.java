@@ -49,6 +49,9 @@ public class Run {
             job.setSortComparatorClass(SortedByWordDESC.class);
             // 设置分组类
             job.setGroupingComparatorClass(GroupByWord.class);
+            // 设置partitioner和Reduce数量
+            job.setNumReduceTasks(3);
+            job.setPartitionerClass(WordCountPartitioner.class);
             // 设置Reducer
             job.setReducerClass(WordCountReducer.class);
             job.setOutputKeyClass(WordCount.class);
