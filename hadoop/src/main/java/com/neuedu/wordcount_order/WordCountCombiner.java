@@ -11,7 +11,7 @@ import java.io.IOException;
  *
  * @author Alephant
  */
-public class WordCountReducer extends Reducer<WordCount, NullWritable, WordCount, NullWritable> {
+public class WordCountCombiner extends Reducer<WordCount, NullWritable, WordCount, NullWritable> {
     @Override
     protected void reduce(WordCount key, Iterable<NullWritable> values, Reducer<WordCount, NullWritable, WordCount, NullWritable>.Context context) throws IOException, InterruptedException {
         // 统计单词出现的总次数

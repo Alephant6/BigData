@@ -1,8 +1,5 @@
 package com.neuedu.wordcount_order;
 
-import com.neuedu.wordcount_oop.WordCount;
-import com.neuedu.wordcount_oop.WordCountMapper;
-import com.neuedu.wordcount_oop.WordCountReducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
@@ -17,7 +14,6 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 
 public class Run {
     public static void main(String[] args) {
@@ -39,14 +35,16 @@ public class Run {
             // 创建任务
             Job job = Job.getInstance(conf, "wordcount");
             // 设置运行类
-            job.setJarByClass(Run.class);
+            job.setJarByClass(com.neuedu.wordcount_normal.Run.class);
             // 设置输入
             job.setInputFormatClass(TextInputFormat.class);
-            FileInputFormat.setInputPaths(job,inputPath);
+            FileInputFormat.setInputPaths(job, inputPath);
             // 设置Mapper
             job.setMapperClass(WordCountMapper.class);
-            job.setMapOutputKeyClass(com.neuedu.wordcount_oop.WordCount.class);
+            job.setMapOutputKeyClass(WordCount.class);
             job.setMapOutputValueClass(NullWritable.class);
+            // 设置归并
+            job.setCombinerClass(WordCountCombiner.class);
             // 设置自定义排序类：一个排序类就是一种排序方案
             job.setSortComparatorClass(SortedByWordDESC.class);
             // 设置分组类
@@ -62,11 +60,11 @@ public class Run {
             boolean flag = job.waitForCompletion(true);
             // 查看结果
             System.out.println("词频统计结束\n单词\t次数");
-            for (FileStatus s : hdfs.listStatus(outputPath)){
+            for (FileStatus s : hdfs.listStatus(outputPath)) {
                 // 目录包含子目录、文件
                 // FileStatus方法getXXX获取指定信息
                 // FileStatus方法isXXX判断
-                if (s.isFile()){
+                if (s.isFile()) {
                     // 打开文件
                     FSDataInputStream reader = hdfs.open(s.getPath());
                     // 构建缓冲读取器对象

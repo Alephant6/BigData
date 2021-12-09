@@ -1,20 +1,20 @@
 package com.neuedu.wordcount_order;
 
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.hadoop.io.WritableComparator;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 自定义实体类WordCount: 多属性，不是一个单词
+ * 自定义实体类WordCount：多属性，不是一个单词
  *
  * @author Alephant
  */
-
 public class WordCount implements WritableComparable<WordCount> {
     /**
-     * word 属性
+     * word属性
      */
     private String word;
     /**
@@ -31,7 +31,7 @@ public class WordCount implements WritableComparable<WordCount> {
     /**
      * 带参构造器
      *
-     * @param word 单词
+     * @param word  单词
      * @param count 次数
      */
     public WordCount(String word, int count) {
@@ -40,14 +40,15 @@ public class WordCount implements WritableComparable<WordCount> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         // 重写toString，输出时会自动调用
         return this.word + "\t" + this.count;
     }
+    WritableComparator a;
     @Override
     public int compareTo(WordCount o) {
         // 实现对象的比较，默认排序
-        if (o == null){
+        if (o == null) {
             return 1;
         }
         return this.word.compareTo(o.word);
@@ -82,7 +83,5 @@ public class WordCount implements WritableComparable<WordCount> {
     public void setCount(int count) {
         this.count = count;
     }
-
-
 
 }
