@@ -8,7 +8,7 @@ import org.apache.hadoop.io.WritableComparator;
  * 功能
  * 按照年份进行分组
  *
- * @author zhang
+ * @author Alephant
  */
 public class GroupByYear extends WritableComparator {
     public GroupByYear() {
