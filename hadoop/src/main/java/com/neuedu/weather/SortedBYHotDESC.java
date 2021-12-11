@@ -25,6 +25,7 @@ public class SortedBYHotDESC extends WritableComparator {
         if (w1.getYear() != w2.getYear()){
             return Integer.compare(w1.getYear(), w2.getYear());
         }
+        // 年份相同时，比较温度，降序
         return -Integer.compare((w1.getHot()), w2.getHot());
     }
 }
