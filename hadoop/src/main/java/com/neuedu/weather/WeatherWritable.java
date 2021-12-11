@@ -7,7 +7,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 /**
- * 编码1：自定义实现类WeatWritable
+ * 编码1：自定义实体类WeatherWritable
  * @author Alephant
  */
 public class WeatherWritable implements WritableComparable<WeatherWritable> {
@@ -43,7 +43,7 @@ public class WeatherWritable implements WritableComparable<WeatherWritable> {
 
     @Override
     public int compareTo(WeatherWritable other) {
-        // 默认比较
+        // 默认比较：通常都是升序
         // other为null
         if (other == null) {
             return 1;
@@ -53,7 +53,7 @@ public class WeatherWritable implements WritableComparable<WeatherWritable> {
             return Integer.compare(this.year, other.year);
         }
         // 年份相同
-        return Integer.compare(this.hot, other.hot);
+        return Integer.compare(this.hot,other.hot);
     }
 
     @Override
