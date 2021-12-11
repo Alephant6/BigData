@@ -5,6 +5,13 @@ import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.RawComparator;
+import org.apache.hadoop.mapreduce.*;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -100,4 +107,87 @@ public class HadoopUtils {
     public static Configuration getConf() {
         return conf;
     }
+
+    /**
+     * 创建任务
+     * @param jobName 任务名
+     * @param cls 运行类
+     * @return
+     * @throws IOException
+     */
+    public static Job createJob(String jobName, Class<?> cls) throws IOException {
+        Job job = Job.getInstance(conf, jobName);
+        job.setJarByClass(cls);
+        return job;
+    }
+
+    /**
+     * 设置输入
+     * @param job
+     * @param inputPath
+     * @param cls
+     * @throws IOException
+     */
+    public static void setIn(Job job, Path inputPath, Class<? extends InputFormat> cls) throws IOException {
+        job.setInputFormatClass(cls);
+        FileInputFormat.setInputPaths(job, inputPath);
+    }
+
+    /**
+     * 设置Mapper
+     * @param job
+     * @param cls1
+     * @param cls2
+     * @param cls3
+     */
+    public static void setMapper(Job job, Class<? extends Mapper> cls1, Class<?> cls2, Class<?> cls3){
+        job.setMapperClass(cls1);
+        job.setMapOutputKeyClass(cls2);
+        job.setMapOutputValueClass(cls3);
+    }
+
+    /**
+     * 设置分区
+     * @param job
+     * @param num
+     * @param cls
+     */
+    public static void setPartitioner(Job job, int num, Class<? extends Partitioner> cls){
+        job.setPartitionerClass(cls);
+        job.setNumReduceTasks(num);
+    }
+
+    /**
+     * 设置自定义排序
+     * @param job
+     * @param cls
+     */
+    public static void setSort(Job job, Class<? extends RawComparator> cls){
+        // 设置自定义排序
+        job.setSortComparatorClass(cls);
+    }
+
+    /**
+     * 设置自定义分组
+     * @param job
+     * @param cls
+     */
+    public static void setGroup(Job job, Class<? extends RawComparator> cls){
+        // 设置自定义分组
+        job.setGroupingComparatorClass(cls);
+    }
+
+    public static void setReducer(Job job, Class<? extends Reducer> cls1, Class<?> cls2, Class<?> cls3){
+        // 设置Reducer
+        job.setReducerClass(cls1);
+        job.setOutputKeyClass(cls2);
+        job.setOutputValueClass(cls3);
+    }
+
+    public static void  setOut(Job job, Path outputPath, Class<? extends OutputFormat> cls)throws IOException {
+        job.setOutputFormatClass(cls);
+        FileOutputFormat.setOutputPath(job, outputPath);
+    }
+
+
 }
