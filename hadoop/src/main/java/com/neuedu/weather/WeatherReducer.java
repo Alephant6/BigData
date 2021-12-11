@@ -1,5 +1,6 @@
 package com.neuedu.weather;
 
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
@@ -14,11 +15,12 @@ import java.io.IOException;
  *
  * @author Alephant
  */
-public class WeatherReducer extends Reducer<WeatherWritable, Text,WeatherWritable, Text> {
+public class WeatherReducer extends Reducer<WeatherWritable, NullWritable,WeatherWritable, NullWritable> {
     @Override
-    protected void reduce(WeatherWritable key, Iterable<Text> values, Reducer<WeatherWritable, Text, WeatherWritable, Text>.Context context) throws IOException, InterruptedException {
-        for (Text v : values) {
-            context.write(key, v);
+    protected void reduce(WeatherWritable key, Iterable<NullWritable> values, Reducer<WeatherWritable, NullWritable, WeatherWritable, NullWritable>.Context context) throws IOException, InterruptedException {
+        for (NullWritable v : values) {
+            context.write(key, NullWritable.get());
+            break;
         }
     }
 }

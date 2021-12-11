@@ -2,6 +2,7 @@ package com.neuedu.weather;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
@@ -21,9 +22,9 @@ import java.io.IOException;
  *
  * @author Alephant
  */
-public class WeatherMapper extends Mapper<LongWritable, Text, WeatherWritable, Text> {
+public class WeatherMapper extends Mapper<LongWritable, Text, WeatherWritable, NullWritable> {
     @Override
-    protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, WeatherWritable, Text>.Context context) throws IOException, InterruptedException {
+    protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, WeatherWritable, NullWritable>.Context context) throws IOException, InterruptedException {
         // 1949-10-01 14:21:02 34℃
         // 1949-10-01 14:21:02 4℃
         // 数据清洗
@@ -40,6 +41,6 @@ public class WeatherMapper extends Mapper<LongWritable, Text, WeatherWritable, T
         int hot = Integer.parseInt(items[1].substring(0, items[1].length() - 1));
         WeatherWritable w = new WeatherWritable(year, hot);
         // 输出
-        context.write(w, value);
+        context.write(w, NullWritable.get());
     }
 }

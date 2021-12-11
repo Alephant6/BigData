@@ -1,6 +1,7 @@
 package com.neuedu.weather;
 
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -30,7 +31,7 @@ public class Run {
             // 设置Mapper
             job.setMapperClass(WeatherMapper.class);
             job.setMapOutputKeyClass(WeatherWritable.class);
-            job.setMapOutputValueClass(Text.class);
+            job.setMapOutputValueClass(NullWritable.class);
             // 设置分区
             job.setPartitionerClass(WeatherPartitioner.class);
             job.setNumReduceTasks(3);
@@ -41,14 +42,14 @@ public class Run {
             // 设置Reducer
             job.setReducerClass(WeatherReducer.class);
             job.setOutputKeyClass(WeatherWritable.class);
-            job.setOutputValueClass(Text.class);
+            job.setOutputValueClass(NullWritable.class);
             // 设置输出
             job.setOutputFormatClass(TextOutputFormat.class);
             FileOutputFormat.setOutputPath(job, outputPath);
             // 运行
             boolean flag = job.waitForCompletion(true);
             if (flag) {
-                System.out.println("年份\t温度");
+                System.out.println("年份\t\t温度");
                 HadoopUtils.showContentOfPath(outputPath);
             }
         }catch(Exception e){

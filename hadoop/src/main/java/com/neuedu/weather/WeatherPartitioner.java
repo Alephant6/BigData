@@ -1,5 +1,6 @@
 package com.neuedu.weather;
 
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;
 
@@ -11,9 +12,9 @@ import org.apache.hadoop.mapreduce.Partitioner;
  *
  * @author Alephant
  */
-public class WeatherPartitioner extends Partitioner<WeatherWritable, Text> {
+public class WeatherPartitioner extends Partitioner<WeatherWritable, NullWritable> {
     @Override
-    public int getPartition(WeatherWritable key, Text value, int numPartitions) {
+    public int getPartition(WeatherWritable key, NullWritable value, int numPartitions) {
         // 特别强调：算法不能太复杂，越简单越好
         // 寻找规律
         // 1949 -> 1949-1940 = 9 -> 9 % 3 = 0
