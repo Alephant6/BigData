@@ -1,0 +1,47 @@
+package com.neuedu.algorithm.t2;
+
+import com.neuedu.algorithm.t1.NotRepeatMapper;
+import com.neuedu.algorithm.t1.NotRepeatReducer;
+import com.neuedu.algorithm.t1.NotRepeatRun;
+import com.neuedu.utils.HadoopUtils;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
+
+/**
+ * @author Alephant
+ */
+public class SortRun {
+    public static void main(String[] args) {
+        try {
+            // 定义输入目录
+            Path inputPath = new Path("/data2");
+            // 定义输出目录
+            Path outputPath = new Path("/data2_result");
+            // 输出目录存在之则删除
+            HadoopUtils.deletePath(outputPath);
+            // 创建任务
+            Job job = HadoopUtils.getJob("sort-asc", SortRun.class);
+            // 设置输入
+            HadoopUtils.setInput(job, TextInputFormat.class, inputPath);
+            // 设置mapper
+            HadoopUtils.setMapper(job, SortMapper.class, IntWritable.class, NullWritable.class);
+            // 设置Reducer
+            HadoopUtils.setReducer(job, SortReducer.class,IntWritable.class,NullWritable.class);
+            // 设置输出
+            HadoopUtils.setOutput(job, TextOutputFormat.class,outputPath);
+            // 运行
+            boolean flag = job.waitForCompletion(true);
+            if (flag) {
+                System.out.println("数据排序完成，数据显示如下：");
+                HadoopUtils.showContentOfPath(outputPath);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+}

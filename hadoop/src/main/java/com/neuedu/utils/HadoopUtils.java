@@ -1,10 +1,12 @@
 package com.neuedu.utils;
 
+import com.neuedu.algorithm.t3.SortedByDESC;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.mapreduce.*;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -156,6 +158,10 @@ public class HadoopUtils {
     public static void setOutput(Job job,Class<? extends OutputFormat> cls,Path dst){
         job.setOutputFormatClass(cls);
         FileOutputFormat.setOutputPath(job, dst);
+    }
+
+    public static void setSortComparator(Job job, Class<? extends RawComparator> cls) {
+        job.setSortComparatorClass(cls);
     }
 
     /**
