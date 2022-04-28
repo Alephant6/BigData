@@ -131,7 +131,7 @@ public class Step5 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         try {
             // 定义输出表名
             String tableName = "results";

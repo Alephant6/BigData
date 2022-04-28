@@ -105,7 +105,7 @@ public class Step1 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         try {
             // 定义输入路径
             String input = "hdfs://master:9000/weather_data";

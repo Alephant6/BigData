@@ -80,7 +80,7 @@ public class Step2 {
         }
     }
 
-    public static void main(String[] args) {
+    public static void run() {
         // 定义表名
         String tableName = "weather";
         // 输入指定日期
