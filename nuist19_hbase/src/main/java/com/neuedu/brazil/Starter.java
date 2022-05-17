@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * 菜单与运行类
  *
- * @author zhang
+ * @author Alephant
  */
 public class Starter {
     private static Scanner scanner = new Scanner(System.in);

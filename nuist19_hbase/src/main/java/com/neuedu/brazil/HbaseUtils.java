@@ -9,7 +9,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import java.io.IOException;
 
 /**
- * @author zhang
+ * @author Alephant
  */
 public class HbaseUtils {
     private static Configuration CONF;
